@@ -1288,26 +1288,12 @@ b, strong { color: var(--gold-light); font-weight:700; }
   gap: 32px;
   margin-top: 48px;
 }
-/* The three are 0.67, 0.82 and 0.67 - a fixed 3:4 frame would crop all of
-   them, and cropping character art costs you heads and feet. Fix the height
-   instead and let each plate take the width its art asks for. */
 .god-plate {
-  height: 400px;
+  width: 232px; aspect-ratio: 3/4;
   border-radius:14px;
-  overflow:hidden;
   border:1px solid rgba(245,158,11,0.28);
   box-shadow: 0 0 42px rgba(245,158,11,0.16), 0 18px 42px rgba(0,0,0,0.6);
   background: rgba(4,8,16,0.5);
-  line-height:0;
-}
-
-.god-row .god-plate > img,
-.god-row .god-plate > video {
-  width: auto;
-  height: 400px;
-  max-width: 100%;
-  object-fit: contain;
-  display: block;
 }
 
 /* ============================================
@@ -1457,7 +1443,7 @@ b, strong { color: var(--gold-light); font-weight:700; }
   font-size: 19.2px;
   font-weight: 500;
   line-height: 1.4;
-  color: #ffffff;
+  color: #d8e2f0;
   padding-left: 20px;
   position: relative;
 }
@@ -2014,11 +2000,11 @@ b, strong { color: var(--gold-light); font-weight:700; }
     <div class="slide-inner">
       <p class="narrative-text small">
         Assemble a <em>team of mythological gods</em> to take on the <em>Primordials</em>
-        by finding and reweaving the <span class="leap">golden threads of fate</span>
+        by finding and reweave the <span class="leap">golden threads of fate</span>
       </p>
       <p class="narrative-text small">
         that simmer inside a vast array of <em>secrets</em> and <em>mysteries</em>, all while
-        navigating an <em>engaging roguelike autobattler</em>.
+        navigating the an <em>engaging roguelike autobattler</em>.
       </p>
     </div>
   </div>
