@@ -962,7 +962,7 @@ b, strong { color: var(--gold-light); font-weight:700; }
 .bang-grid {
   display:grid; grid-template-columns: repeat(2, 1fr);
   gap: 25.6px;
-  width:100%; max-width:1420px; height: 540px;
+  width:100%; max-width:1300px; height: 540px;
 }
 .bang-tile {
   border-radius:12px; overflow:hidden;
@@ -1238,26 +1238,63 @@ b, strong { color: var(--gold-light); font-weight:700; }
 /* ============================================
    SLIDE 18 — ART GALLERY
    ============================================ */
-.art-gallery {
-  display:grid; grid-template-columns: repeat(12, 1fr); grid-auto-flow: dense;
-  align-items:start; gap: 17.6px;
-  width:100%; max-width:1500px; margin:4px auto 0; padding:4px 4px 12px;
+/* Five pieces of very different shape. Masonry balances badly with so few
+   items, so the layout is composed: the two tall character portraits flank a
+   stack of the three landscape pieces. Widths are derived from the real
+   aspect ratios, so nothing is cropped. */
+.art-collage {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 24px;
+  height: 700px;
+  width: 100%;
 }
-.art-tile {
-  grid-column: span 2; border-radius:10px; overflow:hidden;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,130,246,0.18) inset;
-  background: rgba(4,8,16,0.4);
-  transition: transform .3s ease, box-shadow .3s ease;
+
+.ac-portrait {
+  flex: 0 0 auto;
+  height: 700px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(59,130,246,0.22);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.6), 0 0 26px rgba(59,130,246,0.12);
+  background: rgba(4,8,16,0.45);
+  line-height: 0;
 }
-.art-tile.wide { grid-column: span 4; }
-.art-tile img { width:100%; height:auto; display:block; }
-.art-tile:hover { transform: scale(1.04); box-shadow: 0 10px 28px rgba(0,0,0,0.6), 0 0 22px rgba(59,130,246,0.3); }
+.ac-portrait.p-morrigan { width: 405px; }
+.ac-portrait.p-anubis   { width: 468px; }
+
+.ac-stack {
+  flex: 0 0 auto;
+  width: 362px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ac-wide {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(59,130,246,0.22);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+  background: rgba(4,8,16,0.45);
+  line-height: 0;
+}
+
+.art-collage .ac-portrait > img,
+.art-collage .ac-portrait > video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.art-collage .ac-wide > img,
+.art-collage .ac-wide > video {
+  width: 100%; height: auto; object-fit: contain; display: block;
+}
 
 /* ============================================
    SLIDE 11 — PROTOTYPE VIDEO
    ============================================ */
 .demo-video-frame {
-  width:90%; max-width:1500px; height:684px; margin:12px auto 0;
+  width:90%; max-width:1300px; height:684px; margin:12px auto 0;
   border-radius:16px; overflow:hidden;
   border:1px solid rgba(59,130,246,0.25);
   box-shadow: 0 0 50px rgba(59,130,246,0.18), 0 0 0 1px rgba(255,196,0,0.12) inset;
@@ -1318,14 +1355,14 @@ b, strong { color: var(--gold-light); font-weight:700; }
   flex-direction: column;
   gap: 12px;
   width: 100%;
-  max-width: 1480px;
+  max-width: 1300px;
 }
 
 /* Fixed side columns keep the text optically centred on every beat, whether
    one image sits beside it or two flank it. */
 .story-row {
   display: grid;
-  grid-template-columns: 360px minmax(0, 1fr) 360px;
+  grid-template-columns: 340px minmax(0, 1fr) 340px;
   align-items: center;
   gap: 28px;
 }
@@ -1387,7 +1424,7 @@ b, strong { color: var(--gold-light); font-weight:700; }
   align-content: start;
   gap: 14px;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1300px;
   margin-top: 12px;
   flex: 1 1 auto;
   min-height: 0;
@@ -1515,6 +1552,38 @@ b, strong { color: var(--gold-light); font-weight:700; }
 }
 
 /* ============================================
+   QR CODE
+   The code is black on white with its own quiet zone, so it sits on a light
+   plate - a transparent or inverted QR will not scan.
+   ============================================ */
+#corner-qr {
+  position: absolute;
+  right: 24px;
+  bottom: 70px;
+  z-index: 20;
+  width: 120px;
+  padding: 8px;
+  background: #f0f4ff;
+  border-radius: 10px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.55), 0 0 0 1px rgba(245,158,11,0.45);
+  line-height: 0;
+}
+#corner-qr > img { width: 100%; height: auto; display: block; border-radius: 3px; }
+
+.final-qr {
+  margin-top: 30px;
+  width: 300px;
+  height: 300px;
+  padding: 14px;
+  background: #f0f4ff;
+  border-radius: 16px;
+  box-shadow: 0 0 60px rgba(245,158,11,0.22), 0 20px 50px rgba(0,0,0,0.6),
+              0 0 0 1px rgba(245,158,11,0.45);
+  line-height: 0;
+}
+.final-qr > img { width: 100%; height: 100%; object-fit: contain; display: block; border-radius: 4px; }
+
+/* ============================================
    PRESENTER HINT
    ============================================ */
 #hint {
@@ -1561,6 +1630,8 @@ b, strong { color: var(--gold-light); font-weight:700; }
 
 <div id="stage">
 <div id="deck">
+
+  <div id="corner-qr" class="media" data-media="assets/qr" data-mode="still" data-need="QR code"></div>
 
   <!-- ===== 1 · TITLE ===== -->
   <div class="slide active" id="slide-1" data-slide="1">
@@ -1924,15 +1995,14 @@ b, strong { color: var(--gold-light); font-weight:700; }
     <div class="sparkle-layer" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;" data-sparkles="14"></div>
     <div class="slide-inner top-aligned">
       <h2 class="section-title">What If It Looked Like This?</h2>
-      <div class="art-gallery">
-        <div class="art-tile media" data-media="assets/art-01" data-mode="art" data-need="New slide 18 art &mdash; tile 1 (portrait)"></div>
-        <div class="art-tile wide media" data-media="assets/art-02" data-mode="art" data-need="New slide 18 art &mdash; tile 2 (landscape)"></div>
-        <div class="art-tile media" data-media="assets/art-03" data-mode="art" data-need="New slide 18 art &mdash; tile 3 (portrait)"></div>
-        <div class="art-tile wide media" data-media="assets/art-04" data-mode="art" data-need="New slide 18 art &mdash; tile 4 (landscape)"></div>
-        <div class="art-tile wide media" data-media="assets/art-05" data-mode="art" data-need="New slide 18 art &mdash; tile 5 (landscape)"></div>
-        <div class="art-tile media" data-media="assets/art-06" data-mode="art" data-need="New slide 18 art &mdash; tile 6 (portrait)"></div>
-        <div class="art-tile media" data-media="assets/art-07" data-mode="art" data-need="New slide 18 art &mdash; tile 7 (portrait)"></div>
-        <div class="art-tile wide media" data-media="assets/art-08" data-mode="art" data-need="New slide 18 art &mdash; tile 8 (landscape)"></div>
+      <div class="art-collage">
+        <div class="ac-portrait p-morrigan media" data-media="assets/art-morrigan" data-mode="still" data-need="Art &mdash; Morrigan"></div>
+        <div class="ac-stack">
+          <div class="ac-wide media" data-media="assets/art-environment" data-mode="still" data-need="Art &mdash; environment"></div>
+          <div class="ac-wide media" data-media="assets/art-characters"  data-mode="still" data-need="Art &mdash; characters"></div>
+          <div class="ac-wide media" data-media="assets/art-character"   data-mode="still" data-need="Art &mdash; character art"></div>
+        </div>
+        <div class="ac-portrait p-anubis media" data-media="assets/art-anubis" data-mode="still" data-need="Art &mdash; Anubis"></div>
       </div>
     </div>
   </div>
@@ -2147,6 +2217,7 @@ b, strong { color: var(--gold-light); font-weight:700; }
         <span class="name">Jack Desmarais-Harris</span>
         <span class="detail">jdesmara@usc.edu</span>
       </div>
+      <div class="final-qr media" data-media="assets/qr" data-mode="still" data-need="QR code"></div>
     </div>
   </div>
 
@@ -2164,6 +2235,7 @@ b, strong { color: var(--gold-light); font-weight:700; }
   var counter = document.getElementById('slide-counter');
   var bar     = document.getElementById('progress-bar');
   var canvas  = document.getElementById('global-particles');
+  var cornerQr = document.getElementById('corner-qr');
   var current = 1;
   var stepIdx = 0;
 
@@ -2305,6 +2377,7 @@ b, strong { color: var(--gold-light); font-weight:700; }
     bar.style.width = ((current / TOTAL) * 100) + '%';
     canvas.style.opacity = to.getAttribute('data-mood') === 'cold' ? '0.06' : '1';
     setDensity(n === 20 || n === 21);
+    cornerQr.style.display = (n === TOTAL) ? 'none' : '';
   }
 
   function next() {
