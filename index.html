@@ -1291,6 +1291,76 @@ b, strong { color: var(--gold-light); font-weight:700; }
   width: 100%; height: 100%; object-fit: cover; display: block;
 }
 
+/* Art-direction notes ride in the bottom row, which the two portraits leave
+   mostly empty. Same card language as the roles slide. */
+.art-note {
+  flex: 0 0 auto;
+  width: 379px;
+  height: 376px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 22px;
+  background: var(--bg-card);
+  border: 1px solid rgba(59,130,246,0.15);
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+.art-note::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--blue-electric), var(--gold), transparent);
+  opacity: 0.6;
+}
+
+.an-head {
+  font-family: 'Cinzel', serif;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  background: linear-gradient(135deg, var(--blue-bright), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(59,130,246,0.18);
+  flex-shrink: 0;
+}
+
+.an-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0; margin: 0;
+}
+.an-list li {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #e6ecf8;
+  padding-left: 24px;
+  position: relative;
+}
+.an-list li::before {
+  content: '\26A1';
+  position: absolute;
+  left: 0; top: 2px;
+  color: var(--gold);
+  font-size: 0.72em;
+  opacity: 0.85;
+}
+.an-list em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
 /* ============================================
    SLIDE 11 — PROTOTYPE VIDEO
    ============================================ */
@@ -2033,8 +2103,24 @@ b, strong { color: var(--gold-light); font-weight:700; }
           <div class="ac-cell c-cart media" data-media="assets/art-character"   data-mode="still" data-need="Art &mdash; character art"></div>
         </div>
         <div class="ac-row">
+          <div class="art-note">
+            <div class="an-head">2D</div>
+            <ul class="an-list">
+              <li>God portraits with <em>action poses</em></li>
+              <li>Emphasis on <em>iconography</em></li>
+              <li>A <em>new, modern perspective</em> on iconic gods</li>
+            </ul>
+          </div>
           <div class="ac-cell c-mor media" data-media="assets/art-morrigan" data-mode="still" data-need="Art &mdash; Morrigan"></div>
           <div class="ac-cell c-anu media" data-media="assets/art-anubis"   data-mode="still" data-need="Art &mdash; Anubis"></div>
+          <div class="art-note">
+            <div class="an-head">3D</div>
+            <ul class="an-list">
+              <li><em>Painterly</em>, cartoonish</li>
+              <li><em>Dark, gloomy</em> environments</li>
+              <li><em>Heavily saturated</em> highlights</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
