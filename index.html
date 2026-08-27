@@ -1594,6 +1594,35 @@ b, strong { color: var(--gold-light); font-weight:700; }
 }
 #hint.on { opacity:0.55; }
 
+/* ============================================
+   SLIDE 21 - PRIMORDIALS
+   ============================================ */
+.primordial-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 36px 0;
+  height: 300px;
+}
+.primordial-row .media {
+  flex: 0 0 auto;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(245,158,11,0.28);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.6), 0 0 26px rgba(245,158,11,0.12);
+  background: rgba(4,8,16,0.45);
+  line-height: 0;
+}
+.primordial-row .p-1 { width: 411px; }
+.primordial-row .p-2 { width: 420px; }
+.primordial-row .p-3 { width: 225px; }
+.primordial-row .media > img,
+.primordial-row .media > video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
 /* Slide 21 carries the longest single block in the deck. */
 /* Four stacked beats cap the plate height, so buy room from the padding and
    the row gap and spend all of it on the images. */
@@ -2091,7 +2120,14 @@ b, strong { color: var(--gold-light); font-weight:700; }
         where you assemble a <em>team of mythological gods</em> to take down <em>Primordials</em>
         at the end of the world.
       </p>
-      <p class="narrative-text small">
+
+      <div class="primordial-row">
+        <div class="media p-1" data-media="assets/primordial-1" data-mode="still" data-need="Primordial 1"></div>
+        <div class="media p-2" data-media="assets/primordial-2" data-mode="still" data-need="Primordial 2"></div>
+        <div class="media p-3" data-media="assets/primordial-3" data-mode="still" data-need="Primordial 3"></div>
+      </div>
+
+      <p class="narrative-text small step" data-step="1">
         Find and reweave the <span class="leap">golden threads of fate</span> that simmer inside a
         vast array of <em>secrets</em> and <em>mysteries</em>, all while navigating an
         <em>engaging roguelike autobattler</em>.
