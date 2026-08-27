@@ -97,5 +97,24 @@ window rather than the canvas and break the scaling.
 
 ## Hosting
 
-Copy this folder into `FinalSpark_PitchDeckWebsite/` as a subdirectory and it
-publishes at `/<foldername>/` alongside the pitch deck, using the same `push.sh`.
+Live at **https://jackwdharris.github.io/FinalSparkRecruitment/**
+
+Served by GitHub Pages from `main` at the repo root
+(`github.com/JackWDHarris/FinalSparkRecruitment`, public).
+
+To publish changes:
+
+```bash
+cd ~/Documents/FinalSpark_RecruitmentDeck
+git add -A && git commit -m "your message" && git push
+```
+
+Pages rebuilds in under a minute. Assets are plain files in `assets/`, so
+dropping in a new image and pushing is all it takes — no code change.
+
+This is a **separate repo from the pitch deck**. The pitch deck's local repo
+(`~/Documents/FinalSpark_PitchDeckWebsite`) has diverged from its GitHub copy —
+one local commit that was never pushed, and four commits made through the web
+UI that were never pulled — so `push.sh` there will currently be rejected. That
+needs reconciling before the pitch deck can be updated from your machine; it
+does not affect this deck.
