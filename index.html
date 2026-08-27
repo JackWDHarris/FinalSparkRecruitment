@@ -1250,52 +1250,44 @@ b, strong { color: var(--gold-light); font-weight:700; }
    items, so the layout is composed: the two tall character portraits flank a
    stack of the three landscape pieces. Widths are derived from the real
    aspect ratios, so nothing is cropped. */
+/* Two rows rather than a flanked stack: the wide pieces get a row of their
+   own so environment and characters can breathe, and the two portraits come
+   down in scale to flank the character art below. Every size is derived from
+   the real aspect ratio, so nothing is cropped. */
 .art-collage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.ac-row {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   gap: 24px;
-  height: 700px;
-  width: 100%;
 }
 
-.ac-portrait {
+.ac-cell {
   flex: 0 0 auto;
-  height: 700px;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(59,130,246,0.22);
-  box-shadow: 0 14px 40px rgba(0,0,0,0.6), 0 0 26px rgba(59,130,246,0.12);
-  background: rgba(4,8,16,0.45);
-  line-height: 0;
-}
-.ac-portrait.p-morrigan { width: 405px; }
-.ac-portrait.p-anubis   { width: 468px; }
-
-.ac-stack {
-  flex: 0 0 auto;
-  width: 362px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.ac-wide {
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid rgba(59,130,246,0.22);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+  box-shadow: 0 12px 34px rgba(0,0,0,0.58), 0 0 24px rgba(59,130,246,0.10);
   background: rgba(4,8,16,0.45);
   line-height: 0;
 }
 
-.art-collage .ac-portrait > img,
-.art-collage .ac-portrait > video {
+.c-env   { width: 646px; height: 328px; }
+.c-chars { width: 450px; height: 328px; }
+.c-mor   { width: 210px; height: 364px; }
+.c-cart  { width: 619px; height: 364px; }
+.c-anu   { width: 243px; height: 364px; }
+
+.art-collage .ac-cell > img,
+.art-collage .ac-cell > video {
   width: 100%; height: 100%; object-fit: cover; display: block;
-}
-.art-collage .ac-wide > img,
-.art-collage .ac-wide > video {
-  width: 100%; height: auto; object-fit: contain; display: block;
 }
 
 /* ============================================
@@ -2005,13 +1997,15 @@ b, strong { color: var(--gold-light); font-weight:700; }
     <div class="slide-inner top-aligned">
       <h2 class="section-title">What If It Looked Like This?</h2>
       <div class="art-collage">
-        <div class="ac-portrait p-morrigan media" data-media="assets/art-morrigan" data-mode="still" data-need="Art &mdash; Morrigan"></div>
-        <div class="ac-stack">
-          <div class="ac-wide media" data-media="assets/art-environment" data-mode="still" data-need="Art &mdash; environment"></div>
-          <div class="ac-wide media" data-media="assets/art-characters"  data-mode="still" data-need="Art &mdash; characters"></div>
-          <div class="ac-wide media" data-media="assets/art-character"   data-mode="still" data-need="Art &mdash; character art"></div>
+        <div class="ac-row">
+          <div class="ac-cell c-env   media" data-media="assets/art-environment" data-mode="still" data-need="Art &mdash; environment"></div>
+          <div class="ac-cell c-chars media" data-media="assets/art-characters"  data-mode="still" data-need="Art &mdash; characters"></div>
         </div>
-        <div class="ac-portrait p-anubis media" data-media="assets/art-anubis" data-mode="still" data-need="Art &mdash; Anubis"></div>
+        <div class="ac-row">
+          <div class="ac-cell c-mor   media" data-media="assets/art-morrigan"  data-mode="still" data-need="Art &mdash; Morrigan"></div>
+          <div class="ac-cell c-cart  media" data-media="assets/art-character" data-mode="still" data-need="Art &mdash; character art"></div>
+          <div class="ac-cell c-anu   media" data-media="assets/art-anubis"    data-mode="still" data-need="Art &mdash; Anubis"></div>
+        </div>
       </div>
     </div>
   </div>
