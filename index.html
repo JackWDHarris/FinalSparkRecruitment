@@ -1279,11 +1279,12 @@ b, strong { color: var(--gold-light); font-weight:700; }
   line-height: 0;
 }
 
-.c-env   { width: 646px; height: 328px; }
-.c-chars { width: 450px; height: 328px; }
-.c-mor   { width: 210px; height: 364px; }
-.c-cart  { width: 619px; height: 364px; }
-.c-anu   { width: 243px; height: 364px; }
+/* Top row runs the full 1300px; the two portraits sit centred beneath it and
+   take the rest of the height. */
+.c-env  { width: 685px; height: 348px; }
+.c-cart { width: 591px; height: 348px; }
+.c-mor  { width: 218px; height: 376px; }
+.c-anu  { width: 252px; height: 376px; }
 
 .art-collage .ac-cell > img,
 .art-collage .ac-cell > video {
@@ -1596,7 +1597,8 @@ b, strong { color: var(--gold-light); font-weight:700; }
 /* Slide 21 carries the longest single block in the deck. */
 /* Four stacked beats cap the plate height, so buy room from the padding and
    the row gap and spend all of it on the images. */
-#slide-20.slide { padding-top: 22px; padding-bottom: 56px; }
+#slide-20.slide,
+#slide-18.slide { padding-top: 22px; padding-bottom: 56px; }
 
 #slide-21 .narrative-text {
   max-width: 1340px;
@@ -1998,13 +2000,12 @@ b, strong { color: var(--gold-light); font-weight:700; }
       <h2 class="section-title">What If It Looked Like This?</h2>
       <div class="art-collage">
         <div class="ac-row">
-          <div class="ac-cell c-env   media" data-media="assets/art-environment" data-mode="still" data-need="Art &mdash; environment"></div>
-          <div class="ac-cell c-chars media" data-media="assets/art-characters"  data-mode="still" data-need="Art &mdash; characters"></div>
+          <div class="ac-cell c-env  media" data-media="assets/art-environment" data-mode="still" data-need="Art &mdash; environment"></div>
+          <div class="ac-cell c-cart media" data-media="assets/art-character"   data-mode="still" data-need="Art &mdash; character art"></div>
         </div>
         <div class="ac-row">
-          <div class="ac-cell c-mor   media" data-media="assets/art-morrigan"  data-mode="still" data-need="Art &mdash; Morrigan"></div>
-          <div class="ac-cell c-cart  media" data-media="assets/art-character" data-mode="still" data-need="Art &mdash; character art"></div>
-          <div class="ac-cell c-anu   media" data-media="assets/art-anubis"    data-mode="still" data-need="Art &mdash; Anubis"></div>
+          <div class="ac-cell c-mor media" data-media="assets/art-morrigan" data-mode="still" data-need="Art &mdash; Morrigan"></div>
+          <div class="ac-cell c-anu media" data-media="assets/art-anubis"   data-mode="still" data-need="Art &mdash; Anubis"></div>
         </div>
       </div>
     </div>
