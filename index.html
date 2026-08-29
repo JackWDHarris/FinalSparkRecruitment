@@ -651,6 +651,7 @@ html, body {
   font-family:'Inter','Raleway',sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
 }
 
 /* ============================================
@@ -668,10 +669,22 @@ html, body {
   left: 50%;
   width: 1600px;
   height: 900px;
-  transform: translate(-50%, -50%) scale(var(--deck-scale, 1));
+  margin: -450px 0 0 -800px;
+  transform: scale(var(--deck-scale, 1));
   transform-origin: 50% 50%;
   z-index: 5;
 }
+
+/* A 16:9 deck in a portrait viewport can only ever be a thin strip - on a
+   phone that means 4px body text. Turning the stage on its side lets it use
+   the long axis instead, so it fills the screen and the reader turns the
+   phone. With auto-rotate on this un-rotates by itself at the same scale. */
+:root[data-orient="portrait"] #stage {
+  transform: rotate(90deg) scale(var(--deck-scale, 1));
+}
+:root[data-orient="portrait"] .footer,
+:root[data-orient="portrait"] .nav-arrow,
+:root[data-orient="portrait"] #hint { display: none; }
 
 #deck { width:1600px; height:900px; position:relative; overflow:hidden; }
 
@@ -2362,6 +2375,8 @@ b, strong { color: var(--gold-light); font-weight:700; }
   var canvas  = document.getElementById('global-particles');
   var cornerQr = document.getElementById('corner-qr');
   var current = 1;
+  var rotated = false;    // stage turned on its side for a portrait viewport
+  var swiped  = false;    // suppress the click a swipe leaves behind
   var stepIdx = 0;
 
   /* ---------- media resolution -------------------------------------------
@@ -2534,7 +2549,10 @@ b, strong { color: var(--gold-light); font-weight:700; }
 
   document.addEventListener('click', function (e) {
     if (e.target.closest('.nav-arrow') || e.target.closest('a') || e.target.closest('button') || e.target.closest('video')) return;
-    if (e.clientX < window.innerWidth / 2) prev(); else next();
+    if (swiped) { swiped = false; return; }   // a swipe already moved us
+    var before = rotated ? e.clientY < window.innerHeight / 2
+                         : e.clientX < window.innerWidth / 2;
+    if (before) prev(); else next();
   });
   document.getElementById('nav-left').addEventListener('click',  function (e) { e.stopPropagation(); prev(); });
   document.getElementById('nav-right').addEventListener('click', function (e) { e.stopPropagation(); next(); });
@@ -2542,10 +2560,18 @@ b, strong { color: var(--gold-light); font-weight:700; }
   var tx = 0, ty = 0;
   document.addEventListener('touchstart', function (e) {
     tx = e.changedTouches[0].screenX; ty = e.changedTouches[0].screenY;
+    swiped = false;
   }, { passive: true });
   document.addEventListener('touchend', function (e) {
     var dx = e.changedTouches[0].screenX - tx, dy = e.changedTouches[0].screenY - ty;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) { if (dx < 0) next(); else prev(); }
+    // When the stage is turned on its side, a swipe along the deck's own x
+    // axis is a vertical swipe on the screen.
+    var along  = rotated ? dy : dx;
+    var across = rotated ? dx : dy;
+    if (Math.abs(along) > Math.abs(across) && Math.abs(along) > 50) {
+      swiped = true;
+      if (along < 0) next(); else prev();
+    }
   }, { passive: true });
 
   /* ---------- ambient particles ---------- */
@@ -2628,7 +2654,11 @@ b, strong { color: var(--gold-light); font-weight:700; }
   }
 
   function fitStage() {
-    var s = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+    var vw = window.innerWidth, vh = window.innerHeight;
+    rotated = vh > vw;
+    var s = rotated ? Math.min(vh / 1600, vw / 900)
+                    : Math.min(vw / 1600, vh / 900);
+    document.documentElement.dataset.orient = rotated ? 'portrait' : 'landscape';
     document.documentElement.style.setProperty('--deck-scale', s);
   }
   fitStage();
